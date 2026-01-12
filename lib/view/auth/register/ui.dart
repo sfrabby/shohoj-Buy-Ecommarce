@@ -6,8 +6,16 @@ class RegistrationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(backgroundColor: Colors.teal,),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Padding(padding: EdgeInsetsGeometry.all(20), child: Column(
+            children: [
 
+            ],
+          )),
+        ],
+      ),
     );
   }
 }
