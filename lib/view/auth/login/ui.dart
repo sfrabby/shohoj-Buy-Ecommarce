@@ -38,7 +38,7 @@ class LoginScreen extends StatelessWidget {
                 }
                 return null;},
                 HintText: 'Email',
-                Controller: EmailController,
+                Controller: EmailController, suffixIcon: Icon(Icons.email, color: Colors.grey),
               ),
               SizedBox(height: spaceBtwFields),
               Textfields(
@@ -52,7 +52,7 @@ class LoginScreen extends StatelessWidget {
                   return null;
                 },
                 HintText: "Password",
-                Controller: passwordController,
+                Controller: passwordController, suffixIcon: Icon(Icons.remove_red_eye, color: Colors.grey),
               ),
               SizedBox(height: spaceBtwItem),
               CommonButton(
@@ -82,7 +82,7 @@ class LoginScreen extends StatelessWidget {
                   Text("Dont have account ?", style: TextStyle(fontSize: 16)),
                   InkWell(
                     onTap: () {
-                      Get.to(RegistrationScreen());
+                      Get.to(()=>RegistrationScreen());
                     },
                     child: Text(
                       "Register",

@@ -7,9 +7,16 @@ class Textfields extends StatelessWidget {
   final FormFieldValidator validator;
   final String HintText;
   final TextEditingController Controller;
+  final Widget? suffixIcon;
+  final Widget? prefixIcon;
 
   const Textfields({
-    super.key, required this.validator, required this.HintText, required this.Controller,
+    super.key,
+    required this.validator,
+    required this.HintText,
+    required this.Controller,
+     this.suffixIcon,
+    this.prefixIcon,
   });
 
   @override
@@ -21,11 +28,10 @@ class Textfields extends StatelessWidget {
       decoration: InputDecoration(
         hintText: HintText,
         hintStyle: TextStyle(color: Colors.grey),
-        suffixIcon: Icon(Icons.remove_red_eye, color: Colors.grey),
-        contentPadding: EdgeInsets.symmetric(
-          vertical: 15,
-          horizontal: 20,
-        ),
+        suffixIcon: suffixIcon,
+        prefixIcon: prefixIcon,
+
+        contentPadding: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
           borderSide: BorderSide(color: PrimaryColor, width: 2),

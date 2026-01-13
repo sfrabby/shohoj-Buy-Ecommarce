@@ -1,6 +1,5 @@
 import 'package:e_buy/view/auth/login/ui.dart';
 import 'package:e_buy/view/auth/register/ui.dart';
-import 'package:e_buy/view/splash_screen/ui.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -22,11 +21,15 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      getPages: [
+        GetPage(name: '/', page: () => LoginScreen()),
+        GetPage(name: '/RegistrationScreen', page: () => RegistrationScreen()),
+      ],
       theme: ThemeData(
         textTheme: GoogleFonts.poppinsTextTheme()
       ),
    debugShowCheckedModeBanner: false,
-      home:  LoginScreen(),
+      home:  RegistrationScreen(),
     );
   }
 }
