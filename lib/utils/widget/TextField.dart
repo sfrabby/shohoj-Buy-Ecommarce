@@ -29,7 +29,7 @@ class Textfields extends StatelessWidget {
         hintText: HintText,
         hintStyle: TextStyle(color: Colors.grey),
         suffixIcon: suffixIcon,
-        prefixIcon: prefixIcon,
+        prefixIcon: prefixIcon  ,
 
         contentPadding: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
         enabledBorder: OutlineInputBorder(

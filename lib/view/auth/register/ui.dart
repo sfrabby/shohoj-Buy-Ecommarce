@@ -80,6 +80,20 @@ class RegistrationScreen extends StatelessWidget {
                     Controller: AddressC,
                     prefixIcon: Icon(Icons.map, color: Colors.grey),
                   ),
+                  SizedBox(height: spaceBtwFields,),
+                  Textfields(
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return "Please enter password..";
+                      }
+                      return null;
+                    },
+                    HintText: "Password",
+                    Controller: AddressC,
+                    prefixIcon: Icon(Icons.password  , color: Colors.grey),
+                  ),
+
+
                   SizedBox(height: spaceBtwSection,),
                   CommonButton(child: Text("SignUp", style: TextStyle(fontSize: 16),), onTap: (){
                     if(_formKey.currentState!.validate()){}
