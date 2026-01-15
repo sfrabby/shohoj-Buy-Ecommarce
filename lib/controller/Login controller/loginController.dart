@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'package:e_buy/view/home_screen/ui.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
@@ -26,8 +26,11 @@ class loginController extends GetxController {
 
       if (response.statusCode == 200) {
         log("Login Success: ${response.body}");
-        FlutterSecureStorage storage = FlutterSecureStorage();
-        storage.write(key: "token", value: response.body);
+        var responseData = jsonDecode(response.body);
+        String token = responseData['token'];
+        log("Token saved ${token}");
+        var box = GetStorage();
+        box.write("token", token);
         Get.snackbar("Success", "Account login successfully!");
         PhoneController.clear();
         passwordController.clear();
@@ -44,3 +47,4 @@ class loginController extends GetxController {
     }
   }
 }
+
