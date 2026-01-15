@@ -13,6 +13,8 @@ class RegistrationScreen extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
   final controller = Get.put(registerController());
 
+
+
   RegistrationScreen({super.key});
 
   @override

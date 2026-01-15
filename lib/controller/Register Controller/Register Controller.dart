@@ -16,25 +16,34 @@ class registerController extends GetxController {
   final TextEditingController AddressC = TextEditingController();
   final TextEditingController PasswordC = TextEditingController();
 
+
+
   Future<dynamic> userRegister() async {
     try {
       isLoading.value = true;
       var url = Uri.parse("https://b4.coderangon.com/api/register");
 
-      var BodyData = {
-        registerModel().user?.name = NameC.text.trim(),
-        registerModel().user?.phone = PhoneC.text.trim(),
-        registerModel().user?.email = EmailC.text.trim(),
-        registerModel().user?.address = AddressC.text.trim(),
+      Map<String, String> data = {
+        "name": NameC.text.trim(),
+        "phone": PhoneC.text.trim(),
+        "email": EmailC.text.trim(),
+        "address": AddressC.text.trim(),
+        "password": PasswordC.text.trim(),
       };
       var response = await http.post(
         url,
         headers: {"Content-Type": "application/json",
           "Accept": "application/json"},
-        body: jsonEncode(registerModel().toJson()),
+        body: jsonEncode(data),
       );
       if (response.statusCode == 201) {
-        return jsonDecode(response.body);
+        log("Registration Success: ${response.body}");
+        Get.snackbar("Success", "Account created successfully!");
+        NameC.clear();
+        EmailC.clear();
+        PhoneC.clear();
+        AddressC.clear();
+        PasswordC.clear();
       } else {
         throw Exception("register Api error ${response.body}");
       }

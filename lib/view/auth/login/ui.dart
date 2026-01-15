@@ -1,5 +1,6 @@
 import 'package:e_buy/constants/Colors.dart';
 import 'package:e_buy/constants/SizeBox.dart';
+import 'package:e_buy/controller/Login%20controller/loginController.dart';
 import 'package:e_buy/utils/widget/commonButton.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -9,8 +10,7 @@ import '../register/ui.dart';
 
 class LoginScreen extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
-  final TextEditingController EmailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
+  final controller = Get.put(loginController());
 
   LoginScreen({super.key});
 
@@ -30,15 +30,15 @@ class LoginScreen extends StatelessWidget {
               Text('sign in to continue'),
               SizedBox(height: 15),
               Textfields(
-                validator: (value) {if (value == null || value.isEmpty) {
-                  return "Email cannot be empty";
-                }
-                if (!GetUtils.isEmail(value)) {
-                  return "Enter a valid email";
-                }
-                return null;},
-                HintText: 'Email',
-                Controller: EmailController, suffixIcon: Icon(Icons.email, color: Colors.grey),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return "Phone cannot be empty";
+                  }
+                  return null;
+                },
+                HintText: 'Phone',
+                Controller: controller.PhoneController,
+                suffixIcon: Icon(Icons.email, color: Colors.grey),
               ),
               SizedBox(height: spaceBtwFields),
               Textfields(
@@ -46,21 +46,28 @@ class LoginScreen extends StatelessWidget {
                   if (value == null || value.isEmpty) {
                     return "Password cannot be empty";
                   }
-                  if (value.length < 6) {
-                    return "Password must be at least 6 characters";
-                  }
+
                   return null;
                 },
                 HintText: "Password",
-                Controller: passwordController, suffixIcon: Icon(Icons.remove_red_eye, color: Colors.grey),
+                Controller: controller.passwordController,
+                suffixIcon: Icon(Icons.remove_red_eye, color: Colors.grey),
               ),
               SizedBox(height: spaceBtwItem),
-              CommonButton(
-                child: Text("Login", style: TextStyle(fontSize: 16)),
-                onTap: () {
-                  if (_formKey.currentState!.validate()) ;
-                },
-              ),
+              Obx(() {
+                if (controller.isLoading.value) {
+                  return CircularProgressIndicator();
+                }
+                return CommonButton(
+                  child: Text("Login", style: TextStyle(fontSize: 16)),
+                  onTap: () {
+                    if (_formKey.currentState!.validate()) {
+                      controller.userLogin();
+                    }
+                    ;
+                  },
+                );
+              }),
               SizedBox(height: spaceBtwSection),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -82,7 +89,7 @@ class LoginScreen extends StatelessWidget {
                   Text("Dont have account ?", style: TextStyle(fontSize: 16)),
                   InkWell(
                     onTap: () {
-                      Get.to(()=>RegistrationScreen());
+                      Get.to(() => RegistrationScreen());
                     },
                     child: Text(
                       "Register",

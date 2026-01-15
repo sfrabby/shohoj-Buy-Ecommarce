@@ -1,5 +1,9 @@
+import 'package:e_buy/view/home_screen/ui.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
+import '../../constants/images.dart';
+import '../auth/login/ui.dart';
 import '../auth/register/ui.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -10,22 +14,26 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  void Nav()async{
+  void Nav() async {
     await Future.delayed(Duration(seconds: 3));
-    Get.to(RegistrationScreen());
+
+    FlutterSecureStorage storage = FlutterSecureStorage();
+    var token = await storage.read(key: "token");
+    if (token == null) {
+      Get.to(() => LoginScreen());
+    } else {
+      Get.offAll(() => HomeScreen());
+    }
   }
+
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     Nav();
   }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Image.asset("assets/images/ShohojBuy.png"),
-      ),
-    );
+    return Scaffold(body: Center(child: Image.asset(logo1)));
   }
 }
