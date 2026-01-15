@@ -1,5 +1,6 @@
 import 'package:e_buy/view/auth/login/ui.dart';
 import 'package:e_buy/view/auth/register/ui.dart';
+import 'package:e_buy/view/home_screen/ui.dart';
 import 'package:e_buy/view/splash_screen/ui.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -32,7 +33,7 @@ class _MyAppState extends State<MyApp> {
         textTheme: GoogleFonts.poppinsTextTheme()
       ),
    debugShowCheckedModeBanner: false,
-      home:  SplashScreen(),
+      home:  HomeScreen(),
     );
   }
 }
