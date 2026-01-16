@@ -1,3 +1,4 @@
+import 'package:e_buy/utils/widget/commonButton.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -9,8 +10,9 @@ import '../../utils/widget/Shimer.dart';
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
   final productController Controller = Get.put(productController());
+  final String imageBaseUrl = "https://b4.coderangon.com/storage/";
 
-  @override
+       @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -33,7 +35,7 @@ class HomeScreen extends StatelessWidget {
             return buildProductShimmer();
           }
          return GridView.builder(
-            itemCount: 10,
+            itemCount: Controller.productList.length,
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
               crossAxisSpacing: 10,
@@ -44,7 +46,7 @@ class HomeScreen extends StatelessWidget {
               var product = Controller.productList[index];
               return Container(
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: SecondaryColor,
                   borderRadius: BorderRadius.circular(15),
                   boxShadow: [
                     BoxShadow(
@@ -60,7 +62,7 @@ class HomeScreen extends StatelessWidget {
                       child: Container(
                         width: double.infinity,
                         decoration: BoxDecoration(
-                          image: DecorationImage(image: NetworkImage(product.image??"")),
+                          image: DecorationImage(image: NetworkImage(imageBaseUrl + (product.image ?? "")), fit: BoxFit.cover),
                           color: PrimaryColor.withOpacity(0.3),
                           borderRadius: const BorderRadius.vertical(
                             top: Radius.circular(15),
@@ -75,13 +77,14 @@ class HomeScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            product.title ?? " ",
+                            product.title ?? "unknown product ",
                             style: const TextStyle(fontWeight: FontWeight.bold),
                           ),
                           Text(
-                            product.price??"",
-                            style: const TextStyle(color: Colors.green),
+                            "Price - \$${product.price?.toString() ?? "0.00"}",
+                            style: const TextStyle(color: Colors.red),
                           ),
+                          CommonButton(child: Text("Add to Cart"), onTap: (){}, height: 20 ,)
                         ],
                       ),
                     ),

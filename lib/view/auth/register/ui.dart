@@ -93,6 +93,7 @@ class RegistrationScreen extends StatelessWidget {
                         controller.userRegister();
                       }
                     },
+                     height: 50,
                     child: const Text("SignUp", style: TextStyle(fontSize: 16, color: Colors.white)),
                   ),
 

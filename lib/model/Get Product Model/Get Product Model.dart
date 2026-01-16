@@ -30,10 +30,10 @@ class Data {
   String? stock;
   String? sku;
   String? brand;
-  String? price;
-  String? oldPrice;
+  dynamic? price;
+  dynamic? oldPrice;
   String? image;
-  String? rating;
+  dynamic? rating;
   String? reviewCount;
   String? category;
 
@@ -53,14 +53,14 @@ class Data {
   Data.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     title = json['title'];
-    stock = json['stock'];
-    sku = json['sku'];
-    brand = json['brand'];
-    price = json['price'];
-    oldPrice = json['old_price'];
+    stock = json['stock']?.toString();
+    sku = json['sku']?.toString();
+    brand = json['brand']?.toString();
+    price = json['price']?.toString();
+    oldPrice = json['old_price']?.toString();
     image = json['image'];
     rating = json['rating'];
-    reviewCount = json['review_count'];
+    reviewCount = json['review_count']?.toString();
     category = json['category'];
   }
 

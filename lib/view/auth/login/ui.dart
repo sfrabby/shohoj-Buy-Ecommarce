@@ -65,7 +65,7 @@ class LoginScreen extends StatelessWidget {
                       controller.userLogin();
                     }
                     ;
-                  },
+                  }, height: 50,
                 );
               }),
               SizedBox(height: spaceBtwSection),
