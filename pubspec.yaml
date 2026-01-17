@@ -22,6 +22,7 @@ dependencies:
   google_fonts: ^7.0.0
   get_storage: ^2.1.1
   shimmer: ^3.0.0
+  carousel_slider: ^5.1.1
 
 
 
