@@ -1,17 +1,18 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:e_buy/constants/Colors.dart';
 import 'package:e_buy/constants/SizeBox.dart';
+import 'package:e_buy/controller/Product%20Detail%20Controller/singleProductDetail.dart';
+import 'package:e_buy/utils/widget/Shimer.dart';
 import 'package:e_buy/utils/widget/commonButton.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class ProductScreen extends StatelessWidget {
   ProductScreen({super.key});
-  final image = [
 
-    "https://images.herzindagi.info/img-affiliate/2025/Jun/833927.webp",
-    "https://5.imimg.com/data5/SELLER/Default/2023/8/331312932/UR/NE/DF/190567145/trousers-formal.jpg",
-    "https://www.jagranimages.com/images/newimg/02042024/02_04_2024-formal_shirts_for_men_23688324.jpg"
-  ];
+
+  final SingleProductDetail Controller = Get.put(SingleProductDetail());
+  final String imageBaseUrl = "https://b4.coderangon.com/storage/";
 
 
   @override
@@ -30,51 +31,67 @@ class ProductScreen extends StatelessWidget {
           children: [
             Padding(
               padding: const EdgeInsets.all(12.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  CarouselSlider(
-                    carouselController: CarouselSliderController(),
-                    options: CarouselOptions(
+              child: Obx(() {
+                if (Controller.isLoading.value) return buildProductShimmer();
 
+                // গ্যালারি লিস্টটি বের করে নিন
+                List<String> images = Controller.productData.value?.gallery ?? [];
+
+                // যদি গ্যালারি খালি থাকে কিন্তু মেইন ইমেজ থাকে, তবে সেটি লিস্টে যোগ করুন
+                if (images.isEmpty && Controller.productData.value?.image != null) {
+                  images.add(Controller.productData.value!.image!);
+                }
+
+                return Column(
+                  children: [
+                    CarouselSlider(
+                      options: CarouselOptions(
                         autoPlay: true,
-                        height: 200.0),
-                    items: image.map((i) {
-                      return Builder(
-                        builder: (BuildContext context) {
-                          return Container(
-                            width: MediaQuery.of(context).size.width,
-                            margin: EdgeInsets.symmetric(horizontal: 5.0),
-                            decoration: BoxDecoration(
+                        height: 250.0,
+                        viewportFraction: 1.0,
+                        enlargeCenterPage: true,
+                      ),
+                      items: images.map((imgUrl) {
+                        return Builder(
+                          builder: (BuildContext context) {
+                            return Container(
+                              width: MediaQuery.of(context).size.width,
+                              margin: const EdgeInsets.symmetric(horizontal: 5.0),
+                              decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(20),
-                                image: DecorationImage(
-                                    fit: BoxFit.cover,
-                                    image: NetworkImage(i))),
-                          );
-                        },
-                      );
-                    }).toList(),
-                  ),
-                  SizedBox(height: spaceBtwSection),
-                  Text("Mens Formal Shirt", style: TextStyle(fontSize: 20)),
-                  Text("Price -5000", style: TextStyle(color: Colors.red)),
-                  Text("Product Rating - 5.5", style: TextStyle(fontSize: 16)),
-                  Text("Stock - Available", style: TextStyle(fontSize: 16)),
-
-                  SizedBox(height: spaceBtwSection),
-
-                  Text(
-                    "A shirt is a versatile upper-body garment, typically cloth, with sleeves, a neck opening, and often a collar and front buttons, made from materials like cotton, silk, or polyester, coming in styles from casual tees to formal dress shirts, designed for comfort, protection, and style. Descriptions highlight material,",
-                    style: TextStyle(fontSize: 16),
-                  ),
-                  SizedBox(height: spaceBtwSection),
-                  CommonButton(
-                    child: Text("Buy Now", style: TextStyle(fontSize: 18)),
-                    onTap: () {},
-                    height: 50,
-                  ),
-                ],
-              ),
+                                color: Colors.grey[100],
+                              ),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(20),
+                                child: Image.network(
+                                  imageBaseUrl + imgUrl,
+                                  fit: BoxFit.cover,
+                                  errorBuilder: (context, error, stackTrace) =>
+                                  const Icon(Icons.broken_image, size: 50),
+                                ),
+                              ),
+                            );
+                          },
+                        );
+                      }).toList(),
+                    ),
+                     Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(Controller.productData.value?.title ?? "",
+                              style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
+                          Text("Price: ৳${Controller.productData.value?.price}",
+                              style: const TextStyle(color: Colors.red, fontSize: 18)),
+                          const SizedBox(height: 10),
+                          Text(Controller.productData.value?.description ?? ""),
+                        ],
+                      ),
+                    ),
+                  ],
+                );
+              })
             ),
           ],
         ),
