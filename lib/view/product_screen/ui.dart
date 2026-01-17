@@ -8,17 +8,18 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ProductScreen extends StatelessWidget {
-  ProductScreen({super.key});
-
+  ProductScreen({super.key,});
 
   final SingleProductDetail Controller = Get.put(SingleProductDetail());
   final String imageBaseUrl = "https://b4.coderangon.com/storage/";
-
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(onPressed: (){
+          Get.back();
+        }, icon: Icon(Icons.arrow_back_ios, color: BgColor,)),
         backgroundColor: PrimaryColor,
         title: Text(
           "Product Details",
@@ -34,16 +35,24 @@ class ProductScreen extends StatelessWidget {
               child: Obx(() {
                 if (Controller.isLoading.value) return buildProductShimmer();
 
-                // গ্যালারি লিস্টটি বের করে নিন
-                List<String> images = Controller.productData.value?.gallery ?? [];
+                if (Controller.productData.value == null) {
+                  return const Center(
+                    child: Text("Product not found or Server Error!"),
+                  );
+                }
 
-                // যদি গ্যালারি খালি থাকে কিন্তু মেইন ইমেজ থাকে, তবে সেটি লিস্টে যোগ করুন
-                if (images.isEmpty && Controller.productData.value?.image != null) {
-                  images.add(Controller.productData.value!.image!);
+                var product = Controller.productData.value;
+                List<String> images = product?.gallery ?? [];
+
+                // যদি গ্যালারি খালি থাকে তবে মেইন ইমেজটি লিস্টে ঢুকিয়ে দিন
+                if (images.isEmpty && product?.image != null) {
+                  images.add(product!.image!);
                 }
 
                 return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    // --- Carousel Slider ---
                     CarouselSlider(
                       options: CarouselOptions(
                         autoPlay: true,
@@ -56,7 +65,9 @@ class ProductScreen extends StatelessWidget {
                           builder: (BuildContext context) {
                             return Container(
                               width: MediaQuery.of(context).size.width,
-                              margin: const EdgeInsets.symmetric(horizontal: 5.0),
+                              margin: const EdgeInsets.symmetric(
+                                horizontal: 5.0,
+                              ),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(20),
                                 color: Colors.grey[100],
@@ -66,8 +77,13 @@ class ProductScreen extends StatelessWidget {
                                 child: Image.network(
                                   imageBaseUrl + imgUrl,
                                   fit: BoxFit.cover,
+                                  //headers: const {"User-Agent": "Mozilla/5.0"},
                                   errorBuilder: (context, error, stackTrace) =>
-                                  const Icon(Icons.broken_image, size: 50),
+                                      const Icon(
+                                        Icons.broken_image,
+                                        size: 50,
+                                        color: Colors.red,
+                                      ),
                                 ),
                               ),
                             );
@@ -75,23 +91,90 @@ class ProductScreen extends StatelessWidget {
                         );
                       }).toList(),
                     ),
-                     Padding(
-                      padding: const EdgeInsets.all(12.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(Controller.productData.value?.title ?? "",
-                              style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
-                          Text("Price: ৳${Controller.productData.value?.price}",
-                              style: const TextStyle(color: Colors.red, fontSize: 18)),
-                          const SizedBox(height: 10),
-                          Text(Controller.productData.value?.description ?? ""),
-                        ],
+                    const SizedBox(height: spaceBtwSection),
+
+                    // --- Product Info ---
+                    Text(
+                      product?.title ?? "Product Name",
+                      style: const TextStyle(
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold,
                       ),
+                    ),
+
+                    const SizedBox(height: 8),
+
+                    Row(
+                      children: [
+                        Text(
+                          "৳${product?.price}",
+                          style: const TextStyle(
+                            color: Colors.green,
+                            fontSize: 22,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const SizedBox(width: 10),
+                        if (product?.oldPrice != null)
+                          Text(
+                            "৳${product?.oldPrice}",
+                            style: const TextStyle(
+                              color: Colors.grey,
+                              fontSize: 16,
+                              decoration: TextDecoration.lineThrough,
+                            ),
+                          ),
+                      ],
+                    ),
+
+                    const SizedBox(height: spaceBtwItem),
+
+                    Row(
+                      children: [
+                        const Icon(Icons.star, color: Colors.amber, size: 20),
+                        Text(
+                          " ${product?.rating ?? 0.0} (${product?.reviewCount ?? 0} Reviews)",
+                          style: const TextStyle(
+                            fontSize: 14,
+                            color: Colors.grey,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Text("stock - ${product!.stock} items available"),
+
+                    const SizedBox(height: 20),
+                    const Text(
+                      "Description",
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      product?.description ?? "No description available.",
+                      style: const TextStyle(
+                        fontSize: 15,
+                        color: Colors.black87,
+                        height: 1.5,
+                      ),
+                    ),
+
+                    const SizedBox(height: 30),
+
+                    // Buy Now Button
+                    CommonButton(
+                      child: const Text(
+                        "Buy Now",
+                        style: TextStyle(fontSize: 18, color: Colors.white),
+                      ),
+                      onTap: () {},
+                      height: 50,
                     ),
                   ],
                 );
-              })
+              }),
             ),
           ],
         ),

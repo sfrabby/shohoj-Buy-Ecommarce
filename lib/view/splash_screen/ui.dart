@@ -1,3 +1,4 @@
+import 'package:e_buy/constants/Colors.dart';
 import 'package:e_buy/view/home_screen/ui.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -36,6 +37,8 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: Center(child: Image.asset(logo1)));
+    return Scaffold(
+        backgroundColor: BgColor,
+        body: Center(child: Image.asset(logo1)));
   }
 }

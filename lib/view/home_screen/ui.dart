@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:e_buy/utils/widget/commonButton.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -6,7 +8,9 @@ import '../../constants/Colors.dart';
 import '../../controller/Home page/homeController.dart';
 import 'package:shimmer/shimmer.dart';
 
+import '../../controller/Product Detail Controller/singleProductDetail.dart';
 import '../../utils/widget/Shimer.dart';
+import '../product_screen/ui.dart';
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
   final productController Controller = Get.put(productController());
@@ -59,35 +63,46 @@ class HomeScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     Expanded(
-                      child: Container(
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          image: DecorationImage(image: NetworkImage(imageBaseUrl + (product.image ?? "")), fit: BoxFit.cover),
-                          color: PrimaryColor.withOpacity(0.3),
-                          borderRadius: const BorderRadius.vertical(
-                            top: Radius.circular(15),
+                      child: InkWell(
+                        onTap: (){
+                        },
+                        child: Container(
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(image: NetworkImage(imageBaseUrl + (product.image ?? "")), fit: BoxFit.cover),
+                            color: PrimaryColor.withOpacity(0.3),
+                            borderRadius: const BorderRadius.vertical(
+                              top: Radius.circular(15),
+                            ),
                           ),
                         ),
                       ),
                     ),
 
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            product.title ?? "unknown product ",
-                            style: const TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                          Text(
-                            "Price - \$${product.price?.toString() ?? "0.00"}",
-                            style: const TextStyle(color: Colors.red),
-                          ),
-                          CommonButton(child: Text("Add to Cart"), onTap: (){}, height: 20 ,)
-                        ],
+                    InkWell(
+                      onTap: (){},
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              product.title ?? "unknown product ",
+                              style: const TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                            Text(
+                              "Price - \$${product.price?.toString() ?? "0.00"}",
+                              style: const TextStyle(color: Colors.red),
+                            ),
+                            CommonButton(child: Text("Add to Cart"), onTap: (){
+                              Get.to(()=>ProductScreen(),arguments: product.id);
+                            }, height: 20 ,)
+                          ],
+                        ),
                       ),
                     ),
+
+
                   ],
                 ),
               );

@@ -34,7 +34,7 @@ class _MyAppState extends State<MyApp> {
         textTheme: GoogleFonts.poppinsTextTheme()
       ),
    debugShowCheckedModeBanner: false,
-      home:  ProductScreen(),
+      home:  SplashScreen(),
     );
   }
 }
