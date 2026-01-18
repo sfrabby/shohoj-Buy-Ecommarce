@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../constants/Colors.dart';
 
-import '../../controller/Product Detail Controller/singleProductDetail.dart';
 import '../../controller/Product page controller/productPageController.dart';
 import '../../utils/widget/Shimer.dart';
 import '../single_product_screen/ui.dart';

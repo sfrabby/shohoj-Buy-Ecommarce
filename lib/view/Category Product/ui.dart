@@ -17,15 +17,15 @@ class CategoryProduct extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Obx((){
-        if(controller.isLoading.value){
+      body: Obx(() {
+        if (controller.isLoading.value) {
           return buildCategorySkeleton();
         }
-         return Column(
-           crossAxisAlignment: CrossAxisAlignment.start,
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("Categories", style: TextStyle(fontWeight: FontWeight.w500),),
-            SizedBox(height: spaceBtwItem,),
+            Text("Categories", style: TextStyle(fontWeight: FontWeight.w500)),
+            SizedBox(height: spaceBtwItem),
             SizedBox(
               height: 100,
               child: ListView.builder(
@@ -33,18 +33,19 @@ class CategoryProduct extends StatelessWidget {
                 scrollDirection: Axis.horizontal,
                 itemCount: controller.CategoryList.length,
                 itemBuilder: (context, index) {
-
                   var category = controller.CategoryList[index];
                   String imageUrl = "$baseUrl${category.image}".trim();
                   return Stack(
                     children: [
                       Container(
-                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
                         height: 80,
                         width: 80,
                         margin: const EdgeInsets.only(right: 15),
-                      child: Image.network(imageUrl, fit: BoxFit.fill,),
-                      // decoration: BoxDecoration(image: DecorationImage(image: NetworkImage("$baseUrl ${category.image}"))),
+                        child: Image.network(imageUrl, fit: BoxFit.fill),
+                        // decoration: BoxDecoration(image: DecorationImage(image: NetworkImage("$baseUrl ${category.image}"))),
                       ),
                       Positioned(
                         top: 30,
@@ -55,16 +56,15 @@ class CategoryProduct extends StatelessWidget {
                           width: 80,
                           child: Text(category.name.toString()),
                         ),
-                      )
+                      ),
                     ],
                   );
                 },
               ),
             ),
           ],
-        );}
-        ),
-
+        );
+      }),
     );
   }
 }

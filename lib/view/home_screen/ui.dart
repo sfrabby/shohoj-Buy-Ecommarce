@@ -2,9 +2,10 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:e_buy/constants/Colors.dart';
 import 'package:e_buy/constants/SizeBox.dart';
 import 'package:e_buy/controller/Category%20Controller/Category%20Controller.dart';
-import 'package:e_buy/view/Category%20Product/Category%20Product.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '../Category Product/ui.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
