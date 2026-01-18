@@ -1,31 +1,42 @@
 import 'dart:convert';
 import 'dart:developer';
-
-import 'package:get/get_rx/src/rx_types/rx_types.dart';
-import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:http/http.dart' as http;
+import 'package:get/get.dart';
 
-import '../../model/Category Wise Model/CategoryWiseModel.dart';
-
-class CategoryWiseController extends GetxController {
+class SellingTypeController extends GetxController {
   RxBool isLoading = false.obs;
-  var productData = Data().obs;
 
+  // ১. সরাসরি ডাটা রাখার জন্য RxMap এবং RxList ব্যবহার করা
+  RxMap sellData = {}.obs;
+  RxList hotSellingList = [].obs;
+  RxList topSellingList = [].obs;
+  RxList newProductList = [].obs;
 
-  Future<void> fetchCategoryProducts(int categoryId) async {
+  @override
+  void onInit() {
+    super.onInit();
+    getSellType();
+  }
+
+  Future<void> getSellType() async {
     isLoading.value = true;
     try {
-      var url = Uri.parse("https://b4.coderangon.com/api/category/$categoryId");
+      var url = Uri.parse("https://b4.coderangon.com/api/home-products");
       var response = await http.get(url);
 
       if (response.statusCode == 200) {
-        var model = CatogaryWiseModel.fromJson(jsonDecode(response.body));
-        if (model.data != null) {
-          productData.value = model.data!;
-        }
-      } return null;
-    } catch (e) {
-      log("Error: $e");
+        var responseData = jsonDecode(response.body)['data'];
+
+        hotSellingList.value = responseData['hot-selling'] ?? [];
+        topSellingList.value = responseData['top-selling'] ?? [];
+        newProductList.value = responseData['new-product'] ?? [];
+
+        log("Data Loaded Successfully");
+      } else {
+        log("Server error: ${response.statusCode}");
+      }
+    } catch (error) {
+      log("Error: ${error.toString()}");
     } finally {
       isLoading.value = false;
     }

@@ -1,3 +1,4 @@
+import 'package:e_buy/view/Top%20selling%20Product/ui.dart';
 import 'package:e_buy/view/auth/login/ui.dart';
 import 'package:e_buy/view/auth/register/ui.dart';
 import 'package:e_buy/view/home_screen/ui.dart';
@@ -33,7 +34,7 @@ class _MyAppState extends State<MyApp> {
         textTheme: GoogleFonts.poppinsTextTheme()
       ),
    debugShowCheckedModeBanner: false,
-      home:  HomeScreen(),
+      home:  TopSellingProduct(),
     );
   }
 }
