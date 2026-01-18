@@ -1,11 +1,11 @@
 import 'package:e_buy/constants/Colors.dart';
-import 'package:e_buy/view/home_screen/ui.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import '../../constants/images.dart';
 import '../auth/login/ui.dart';
 import '../auth/register/ui.dart';
+import '../product_screen/ui.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -25,7 +25,7 @@ class _SplashScreenState extends State<SplashScreen> {
     if (token == null) {
       Get.to(() => LoginScreen());
     } else {
-      Get.offAll(() => HomeScreen());
+      Get.offAll(() => ProductScreen());
     }
   }
 

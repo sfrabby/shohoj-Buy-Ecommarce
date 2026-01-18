@@ -1,10 +1,11 @@
 import 'dart:convert';
 import 'dart:developer';
-import 'package:e_buy/view/home_screen/ui.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+
+import '../../view/product_screen/ui.dart';
 
 class loginController extends GetxController {
   final TextEditingController PhoneController = TextEditingController();
@@ -34,7 +35,7 @@ class loginController extends GetxController {
         Get.snackbar("Success", "Account login successfully!");
         PhoneController.clear();
         passwordController.clear();
-       Get.offAll(()=>HomeScreen());
+       Get.offAll(()=>ProductScreen());
       }
       else{
         throw Exception("Login Api Error ${response.body}");
