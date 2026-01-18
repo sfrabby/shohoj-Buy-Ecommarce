@@ -1,10 +1,12 @@
-class SliderModel {
+import 'package:flutter/foundation.dart';
+
+class CategoryModel {
   String? status;
   List<Data>? data;
 
-  SliderModel({this.status, this.data});
+  CategoryModel({this.status, this.data});
 
-  SliderModel.fromJson(Map<String, dynamic> json) {
+  CategoryModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     if (json['data'] != null) {
       data = <Data>[];
@@ -26,22 +28,28 @@ class SliderModel {
 
 class Data {
   int? id;
-  String? title;
+  String? name;
   String? image;
+  String? createdAt;
+  String? updatedAt;
 
-  Data({this.id, this.title, this.image});
+  Data({this.id, this.name, this.image, this.createdAt, this.updatedAt});
 
   Data.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    title = json['title'];
+    name = json['name'];
     image = json['image'];
+    createdAt = json['created_at'];
+    updatedAt = json['updated_at'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
-    data['title'] = this.title;
+    data['name'] = this.name;
     data['image'] = this.image;
+    data['created_at'] = this.createdAt;
+    data['updated_at'] = this.updatedAt;
     return data;
   }
 }
