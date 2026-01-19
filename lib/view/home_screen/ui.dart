@@ -1,7 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:e_buy/constants/Colors.dart';
-import 'package:e_buy/constants/SizeBox.dart';
-import 'package:e_buy/controller/Category%20Controller/Category%20Controller.dart';
 import 'package:e_buy/view/Hot%20selling%20Product/ui.dart';
 import 'package:e_buy/view/New%20Product/ui.dart';
 import 'package:e_buy/view/Top%20selling%20Product/ui.dart';

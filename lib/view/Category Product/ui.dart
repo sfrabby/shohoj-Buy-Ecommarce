@@ -1,3 +1,4 @@
+import 'package:e_buy/constants/Colors.dart';
 import 'package:e_buy/constants/SizeBox.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -51,7 +52,7 @@ class CategoryProduct extends StatelessWidget {
                         top: 30,
                         child: Container(
                           alignment: Alignment.center,
-                          color: Colors.grey,
+                          color: PrimaryColor,
                           height: 20,
                           width: 80,
                           child: Text(category.name.toString()),
