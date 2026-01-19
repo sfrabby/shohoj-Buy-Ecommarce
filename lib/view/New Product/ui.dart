@@ -9,8 +9,8 @@ import '../../utils/widget/commonButton.dart';
 import '../../utils/widget/selling shimmer.dart';
 import '../single_product_screen/ui.dart';
 
-class TopSellingProduct extends StatelessWidget {
-  TopSellingProduct({super.key});
+class NewProduct extends StatelessWidget {
+  NewProduct({super.key});
   final SellingTypeController Controller = Get.put(SellingTypeController());
   final String imageBaseUrl = "https://b4.coderangon.com/storage/";
 
@@ -28,7 +28,7 @@ class TopSellingProduct extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "Top Selling Product",
+              "New Product",
               style: TextStyle(fontWeight: FontWeight.w900),
             ),
             SizedBox(
@@ -38,7 +38,7 @@ class TopSellingProduct extends StatelessWidget {
                 itemCount: Controller.topSellingList.length,
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (context, index) {
-                  var product = Controller.topSellingList[index];
+                  var product = Controller.newProductList[index];
                   return Container(
                     width:
                     180,

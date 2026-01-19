@@ -24,8 +24,8 @@ class CategoryProduct extends StatelessWidget {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("Categories", style: TextStyle(fontWeight: FontWeight.w500)),
-            SizedBox(height: spaceBtwItem),
+            Text("Categories", style: TextStyle(fontWeight: FontWeight.w900)),
+            SizedBox(height: 10),
             SizedBox(
               height: 100,
               child: ListView.builder(

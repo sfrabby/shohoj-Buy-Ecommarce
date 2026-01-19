@@ -9,8 +9,8 @@ import '../../utils/widget/commonButton.dart';
 import '../../utils/widget/selling shimmer.dart';
 import '../single_product_screen/ui.dart';
 
-class TopSellingProduct extends StatelessWidget {
-  TopSellingProduct({super.key});
+class HotSellingProduct extends StatelessWidget {
+  HotSellingProduct({super.key});
   final SellingTypeController Controller = Get.put(SellingTypeController());
   final String imageBaseUrl = "https://b4.coderangon.com/storage/";
 
@@ -28,17 +28,17 @@ class TopSellingProduct extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "Top Selling Product",
+              "Hot Selling Product",
               style: TextStyle(fontWeight: FontWeight.w900),
             ),
             SizedBox(
               height: 250,
               child: ListView.builder(
                 shrinkWrap: true,
-                itemCount: Controller.topSellingList.length,
+                itemCount: Controller.hotSellingList.length,
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (context, index) {
-                  var product = Controller.topSellingList[index];
+                  var product = Controller.hotSellingList[index];
                   return Container(
                     width:
                     180,
@@ -61,8 +61,7 @@ class TopSellingProduct extends StatelessWidget {
                       ],
                     ),
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment
-                          .start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Expanded(
                           child: InkWell(
@@ -119,7 +118,7 @@ class TopSellingProduct extends StatelessWidget {
                                     );
                                   },
                                   height:
-                                  30, // হাইট সামান্য বাড়িয়ে দিলাম যাতে দেখতে সুন্দর লাগে
+                                  30,
                                 ),
                               ),
                             ],

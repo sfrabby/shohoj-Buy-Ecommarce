@@ -2,6 +2,9 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:e_buy/constants/Colors.dart';
 import 'package:e_buy/constants/SizeBox.dart';
 import 'package:e_buy/controller/Category%20Controller/Category%20Controller.dart';
+import 'package:e_buy/view/Hot%20selling%20Product/ui.dart';
+import 'package:e_buy/view/New%20Product/ui.dart';
+import 'package:e_buy/view/Top%20selling%20Product/ui.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -31,17 +34,17 @@ class HomeScreen extends StatelessWidget {
           children: [
             Container(
               height: 200,
-              margin: const EdgeInsets.symmetric(vertical: 10),
+              margin: const EdgeInsets.symmetric(vertical: 5),
               child: CarouselSlider(
                 options: CarouselOptions(
                   height: 200.0,
-                  viewportFraction: 0.9,
+                  viewportFraction: 0.8,
                   autoPlay: true,
                   enlargeCenterPage: true,
                 ),
                 items: imageList.map((i) {
                   return ClipRRect(
-                    borderRadius: BorderRadius.circular(20),
+                    borderRadius: BorderRadius.circular(10),
                     child: Image.network(
                       i,
                       fit: BoxFit.cover,
@@ -54,14 +57,24 @@ class HomeScreen extends StatelessWidget {
                 }).toList(),
               ),
             ),
+            SizedBox(height: 10,),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 0),
               child: Column(
                 children: [
                   SizedBox(
-                    height: 150,
+                    height: 130,
                     child: CategoryProduct(),
                   ),
+                  SizedBox(
+                    height: 280,
+                      child: TopSellingProduct()),
+                  SizedBox(
+                    height: 280,
+                    child: HotSellingProduct(),
+                  ),
+                  SizedBox(height: 280,
+                  child: NewProduct(),)
                 ],
               ),
             )
