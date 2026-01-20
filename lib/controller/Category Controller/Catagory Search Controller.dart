@@ -5,21 +5,23 @@ import 'package:get/get.dart';
 
 import '../../model/Catogary Model/Catogary Model.dart';
 
-class CategoryController extends GetxController {
+class CategoryWiseController extends GetxController {
   RxBool isLoading = false.obs;
   final CategoryList = <Data>[].obs;
 
   @override
   void onInit() {
-    // TODO: implement onInit
+    // TODO: implement onInit          
     super.onInit();
-    GetCategory();
+    if (Get.arguments != null ) {
+      int CID= Get.arguments;
+      GetProductCategory(CID);
+    }
   }
-
-  Future<void> GetCategory() async {
+  Future<void> GetProductCategory(int CID) async {
     isLoading.value = true;
     try {
-      var url = Uri.parse("https://b4.coderangon.com/api/categories/$CID");
+      var url = Uri.parse("https://b4.coderangon.com/api/categories/${CID}");
       var response = await http.get(url);
       if (response.statusCode == 200) {
         var Category = CategoryModel.fromJson(jsonDecode(response.body));
