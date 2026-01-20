@@ -9,6 +9,7 @@ import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 
 import '../../controller/Category Controller/Category Controller.dart';
 import '../../utils/widget/Category Shimmer.dart';
+import 'categoryWiseProduct.dart';
 
 class CategoryProduct extends StatelessWidget {
   CategoryProduct({super.key});
@@ -40,7 +41,7 @@ class CategoryProduct extends StatelessWidget {
                   String imageUrl = "$baseUrl${category.image}".trim();
                   return InkWell(
                     onTap: () {
-                      Get.to(() => ProductScreen(), arguments: category.id);
+                      Get.to(() => CategoryProductScreen(), arguments: category.id);
                     },
                     child: Stack(
                       children: [
