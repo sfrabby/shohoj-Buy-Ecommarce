@@ -12,7 +12,9 @@ import '../../utils/widget/Category Shimmer.dart';
 import 'categoryWiseProduct.dart';
 
 class CategoryProduct extends StatelessWidget {
-  CategoryProduct({super.key});
+  CategoryProduct({super.key, });
+
+
 
   final CategoryController controller = Get.put(CategoryController());
 

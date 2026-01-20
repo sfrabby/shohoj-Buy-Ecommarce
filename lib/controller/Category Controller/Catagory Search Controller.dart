@@ -24,7 +24,7 @@ class CategoryWiseController extends GetxController {
       var url = Uri.parse("https://b4.coderangon.com/api/categories/${CID}");
       var response = await http.get(url);
       if (response.statusCode == 200) {
-        var Category = CategoryModel.fromJson(jsonDecode(response.body));
+        var Category = jsonDecode(response.body);
         if (Category.data != null) {
           CategoryList.assignAll(Category.data!);
         }

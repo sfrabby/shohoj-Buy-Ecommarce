@@ -17,14 +17,15 @@ class productController extends GetxController {
   void onInit() {
     // TODO: implement onInit
     super.onInit();
-    getProduct();
+    int cid = Get.arguments;
+    getProduct( cid: cid);
   }
 
 
-  Future<GetProductModel?> getProduct() async {
+  Future<GetProductModel?> getProduct({required cid}) async {
     isLoading.value=true;
     try {
-      var url = Uri.parse("https://b4.coderangon.com/api/products");
+      var url = Uri.parse("https://b4.coderangon.com/api/products/$cid");
       var response = await http.get(url);
       if (response.statusCode == 200) {
        var product = GetProductModel.fromJson(jsonDecode(response.body));
