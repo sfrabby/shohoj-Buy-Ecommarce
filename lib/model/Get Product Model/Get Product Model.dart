@@ -1,10 +1,10 @@
-class GetProductModel {
+class ProductModel {
   String? status;
   List<Data>? data;
 
-  GetProductModel({this.status, this.data});
+  ProductModel({this.status, this.data});
 
-  GetProductModel.fromJson(Map<String, dynamic> json) {
+  ProductModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     if (json['data'] != null) {
       data = <Data>[];
@@ -30,10 +30,10 @@ class Data {
   String? stock;
   String? sku;
   String? brand;
-  dynamic? price;
-  dynamic? oldPrice;
+  String? price;
+  String? oldPrice;
   String? image;
-  dynamic? rating;
+  String? rating;
   String? reviewCount;
   String? category;
 
@@ -53,14 +53,14 @@ class Data {
   Data.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     title = json['title'];
-    stock = json['stock']?.toString();
-    sku = json['sku']?.toString();
-    brand = json['brand']?.toString();
-    price = json['price']?.toString();
-    oldPrice = json['old_price']?.toString();
+    stock = json['stock'];
+    sku = json['sku'];
+    brand = json['brand'];
+    price = json['price'];
+    oldPrice = json['old_price'];
     image = json['image'];
     rating = json['rating'];
-    reviewCount = json['review_count']?.toString();
+    reviewCount = json['review_count'];
     category = json['category'];
   }
 

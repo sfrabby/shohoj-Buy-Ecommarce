@@ -10,7 +10,7 @@ import '../single_product_screen/ui.dart';
 
 class ProductScreen extends StatelessWidget {
   ProductScreen({super.key});
-  final productController Controller = Get.put(productController());
+  final ProductController Controller = Get.put(ProductController());
   final String imageBaseUrl = "https://b4.coderangon.com/storage/";
 
   @override
@@ -120,4 +120,6 @@ class ProductScreen extends StatelessWidget {
       ),
     );
   }
+
+
 }

@@ -2,6 +2,7 @@ import 'package:e_buy/view/Top%20selling%20Product/ui.dart';
 import 'package:e_buy/view/auth/login/ui.dart';
 import 'package:e_buy/view/auth/register/ui.dart';
 import 'package:e_buy/view/home_screen/ui.dart';
+import 'package:e_buy/view/product_screen/ui.dart';
 import 'package:e_buy/view/splash_screen/ui.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
